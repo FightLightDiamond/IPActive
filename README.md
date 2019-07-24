@@ -45,7 +45,7 @@ return [
 ];
 ```
 
-Define action is limit access ip at IPActive\Define
+Define action is limit access ip at IPActive\Define.php
 
 ```angular2html
 // Action 
