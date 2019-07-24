@@ -1,0 +1,30 @@
+{
+  "name": "cuongpm/ip-active",
+  "license": "MIT",
+  "type": "library",
+  "keywords": [
+    "ip",
+    "limit",
+    "user",
+    "active",
+    "time",
+    "access",
+    "javascript",
+    "laravel"
+  ],
+  "authors": [
+    {
+      "name": "Fight Light Diamond",
+      "email": "i.am.m.cuong@gmail.com",
+      "homepage": "http://cuongpm.viralsoft.vn/"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "IPActive\\": "./src"
+    }
+  },
+  "require": {
+  }
+}
