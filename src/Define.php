@@ -7,7 +7,7 @@
 
 namespace IPActive;
 
-
+// You can change save config to DB
 class Define
 {
     /**
@@ -29,4 +29,27 @@ class Define
 
     const SEND_RESET_PASSWORD_MIDDLEWARE = 'ip-active:' . self::SEND_RESET_PASSWORD;
 
+	/**
+	 * List configs
+	 * @return array
+	 */
+	protected function getListValidTime()
+	{
+		return [
+			self::REGISTER => config('ip-active.register_time'),
+			self::RESEND_CONFIRMATION_EMAIL => config('ip-active.resend_confirmation_email_time'),
+			self::SEND_RESET_PASSWORD_MIDDLEWARE => config('ip-active.send_reset_password_time')
+		];
+	}
+
+	/**
+	 * Get time of action
+	 * @param $action
+	 * @return mixed
+	 */
+
+	public function getValidTime($action)
+	{
+		return $this->getListValidTime()[$action];
+	}
 }

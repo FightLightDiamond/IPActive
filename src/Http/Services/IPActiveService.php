@@ -62,15 +62,8 @@ class IPActiveService
 
     protected function getValidTime($action)
     {
-        return $this->getListValidTime()[$action];
-    }
+    	$define = new Define();
 
-    protected function getListValidTime()
-    {
-        return [
-            Define::REGISTER => config('ip-active.register_time'),
-            Define::RESEND_CONFIRMATION_EMAIL => config('ip-active.resend_confirmation_email_time'),
-            Define::SEND_RESET_PASSWORD_MIDDLEWARE => config('ip-active.send_reset_password_time')
-        ];
+        return $define->getValidTime($action);
     }
 }
