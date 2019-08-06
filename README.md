@@ -35,35 +35,19 @@ php artisan vendor:publish
 Config with `ip-active.php`:
 ```
 return [
-    // Time cron clean DB
     'ip_active_log_clean_cron' => env('IP_ACTIVE_CLEAN_CRON', '0 0 * * *'),
 
-    // Time second limit access
-    'register_time' =>  env('REGISTER_TIME', 30),
-    'resend_confirmation_email_time' =>  env('RESEND_CONFIRMATION_EMAIL_TIME', 30),
-    'send_reset_password_time' =>  env('SEND_RESET_PASSWORD_TIME', 30),
+    'times' => [
+        'register' => env('REGISTER_TIME', 30),
+        'resend_confirmation_email' => env('RESEND_CONFIRMATION_EMAIL_TIME', 30),
+        'send_reset_password' => env('SEND_RESET_PASSWORD_TIME', 30),
+    ],
 ];
 ```
 
-Define action is limit access ip at `IPActive\Define.php`
-
-```angular2html
-// Action 
-const REGISTER = 1;
-const RESEND_CONFIRMATION_EMAIL = 2;
-const SEND_RESET_PASSWORD = 3;
-
-/**
-* Middleware name
-*/
-
-const REGISTER_MIDDLEWARE = 'ip-active:' . self::REGISTER;
-const RESEND_CONFIRMATION_EMAIL_MIDDLEWARE = 'ip-active:' . self::RESEND_CONFIRMATION_EMAIL;
-const SEND_RESET_PASSWORD_MIDDLEWARE = 'ip-active:' . self::SEND_RESET_PASSWORD;
-```
-You can extend to define new action
-
 Example for add middleware to register
 ```angular2html
-Route({ // do something})->middleware(IPActive\Define::REGISTER_MIDDLEWARE)
+Route({ // do something})->middleware(IPActive\Define::middleware('register'))
+Route({ // do something})->middleware(IPActive\Define::middleware('resend_confirmation_email'))
+Route({ // do something})->middleware(IPActive\Define::middleware('send_reset_password'))
 ```

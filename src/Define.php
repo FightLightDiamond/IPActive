@@ -11,45 +11,38 @@ namespace IPActive;
 class Define
 {
     /**
-     * Action name
+     * List configs
+     * @return array
      */
-    const REGISTER = 1;
+    protected function getListValidTime()
+    {
+        return config('ip-active.times', []);
+    }
 
-    const RESEND_CONFIRMATION_EMAIL = 2;
+    /**
+     * Get time of action
+     * @param $action
+     * @return mixed
+     */
+    public function getValidTime($action)
+    {
+        $times = $this->getListValidTime();
 
-    const SEND_RESET_PASSWORD = 3;
+        return $times[$action] ?? 0;
+    }
 
     /**
      * Middleware name
      */
+    const MIDDLEWARE = 'ip-active';
 
-    const REGISTER_MIDDLEWARE = 'ip-active:' . self::REGISTER;
+    /*
+     * Get Middleware name
+     */
 
-    const RESEND_CONFIRMATION_EMAIL_MIDDLEWARE = 'ip-active:' . self::RESEND_CONFIRMATION_EMAIL;
+    protected static function middleware($active)
+    {
+        return self::MIDDLEWARE . ':' . $active;
+    }
 
-    const SEND_RESET_PASSWORD_MIDDLEWARE = 'ip-active:' . self::SEND_RESET_PASSWORD;
-
-	/**
-	 * List configs
-	 * @return array
-	 */
-	protected function getListValidTime()
-	{
-		return [
-			self::REGISTER => config('ip-active.register_time'),
-			self::RESEND_CONFIRMATION_EMAIL => config('ip-active.resend_confirmation_email_time'),
-			self::SEND_RESET_PASSWORD_MIDDLEWARE => config('ip-active.send_reset_password_time')
-		];
-	}
-
-	/**
-	 * Get time of action
-	 * @param $action
-	 * @return mixed
-	 */
-
-	public function getValidTime($action)
-	{
-		return $this->getListValidTime()[$action];
-	}
 }

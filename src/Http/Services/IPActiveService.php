@@ -26,7 +26,7 @@ class IPActiveService
         $this->model = $ipActiveLog;
     }
 
-    public function checkValidTime($ip, $action)
+    public function isValidTime($ip, $action)
     {
         $this->data = compact('ip', 'action');
 
@@ -50,7 +50,7 @@ class IPActiveService
     public function checkTimeActiveLatest($action)
     {
         $ip = request()->ip();
-        $result = $this->checkValidTime($ip, $action);
+        $result = $this->isValidTime($ip, $action);
 
         if($result) {
             event(new IPActiveEvent($this->data));

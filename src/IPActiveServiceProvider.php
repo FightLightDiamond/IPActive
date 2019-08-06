@@ -41,7 +41,7 @@ class IPActiveServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        app('router')->aliasMiddleware('ip-active', IPActiveMiddleware::class);
+        app('router')->aliasMiddleware(Define::MIDDLEWARE, IPActiveMiddleware::class);
 
         $this->app->register(IPActiveEventServiceProvider::class);
     }
